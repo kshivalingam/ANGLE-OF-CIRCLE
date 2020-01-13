@@ -1,0 +1,50 @@
+let ar;
+
+function setup() {
+  createCanvas(400, 400);
+  background(0);
+  ar = new arc_degree(200, 200, 150, 150);
+}
+
+function draw() {
+  background(0);
+  ar.draw_();
+  line(0,200,400,200);
+  line(200,0,200,400);
+  if(mouseIsPressed){
+    ar.position_(mouseX,mouseY);
+  }
+}
+
+function arc_degree(x, y, w, h) {
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  // this.start = start;
+  // this.stop = stop;
+  this.draw_ = function() {
+    noFill();
+    stroke(255);
+    strokeWeight(4);
+    //ellipseMode(RADIUS);
+    ellipse(this.x, this.y, this.w, this.h);
+    //pointMode(CENTER);
+    
+  }
+  this.position_=function(x,y){
+    if(floor(dist(this.x,this.y,x,y))){
+       m=abs((y-this.y)/(x-this.x));
+       //print("Radians =",atan(m));
+       m=degrees(atan(m));
+      //print("DEGREES =",m);
+      if(this.x<=x && this.y>=y) {
+        print("fourth ",90-m+270);}
+      else if(this.x>=x && this.y<=y) print("second ",90-m+ 90);
+      else if(this.x>=x && this.y>=y) print("third ",180+m);
+      else print("first ",m);
+      
+    }
+  }
+
+}
